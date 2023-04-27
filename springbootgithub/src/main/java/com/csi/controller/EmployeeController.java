@@ -1,12 +1,14 @@
 package com.csi.controller;
 
 import com.csi.model.Employee;
+import com.csi.repo.EmployeeRepo;
 import com.csi.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -16,6 +18,8 @@ public class EmployeeController {
 
     @Autowired
     EmployeeServiceImpl employeeServiceImpl;
+    @Autowired
+    EmployeeRepo employeeRepo;
 
     @PostMapping("/savedata")
 
@@ -46,4 +50,9 @@ public class EmployeeController {
     public ResponseEntity <List<Employee>>sorByName(){
         return ResponseEntity.ok(employeeServiceImpl.getAllData().stream().sorted((c1,c2)->c1.getEmpName().compareTo(c2.getEmpName())).collect(Collectors.toList()));
     }
+    @GetMapping("/getDatabyId/{empId}")
+    public ResponseEntity<Optional<Employee>>getDataById(@PathVariable int empId){
+        return ResponseEntity.ok(employeeRepo.findById(empId));
+    }
+
 }
