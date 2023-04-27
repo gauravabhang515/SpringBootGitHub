@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
+
 public class EmployeeController {
 
     @Autowired
@@ -39,5 +41,9 @@ public class EmployeeController {
     public ResponseEntity<String> deleteAllData() {
         employeeServiceImpl.deleteAllData();
         return ResponseEntity.ok("DEleteeddddddddd all data");
+    }
+    @GetMapping("/sortByName")
+    public ResponseEntity <List<Employee>>sorByName(){
+        return ResponseEntity.ok(employeeServiceImpl.getAllData().stream().sorted((c1,c2)->c1.getEmpName().compareTo(c2.getEmpName())).collect(Collectors.toList()));
     }
 }
