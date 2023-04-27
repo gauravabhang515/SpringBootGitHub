@@ -46,4 +46,8 @@ public class EmployeeController {
     public ResponseEntity <List<Employee>>sorByName(){
         return ResponseEntity.ok(employeeServiceImpl.getAllData().stream().sorted((c1,c2)->c1.getEmpName().compareTo(c2.getEmpName())).collect(Collectors.toList()));
     }
+    @GetMapping("/sosdgfsrtByName")
+    public ResponseEntity <List<Employee>>sdfsfs(){
+        return ResponseEntity.ok(employeeServiceImpl.getAllData().stream().sorted((c1,c2)->c1.getEmpName().compareTo(c2.getEmpName())).collect(Collectors.toList()));
+    }
 }
